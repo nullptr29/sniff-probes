@@ -15,7 +15,7 @@ channel_hop() {
 	while true ; do
 		for CHAN in $IEEE80211bg ; do
 			# echo "switching $IFACE to channel $CHAN"
-			sudo iwconfig $IFACE channel $CHAN
+			iwconfig $IFACE channel $CHAN
 			sleep 2
 		done
 	done
@@ -37,4 +37,4 @@ if [ "$CHANNEL_HOP" -eq 1 ] ; then
 fi
 
 # filter with awk, then use sed to convert tabs to spaces and remove front and back quotes around SSID
-sudo tcpdump -l -I -i "$IFACE" -e -s 256 type mgt subtype probe-req | awk -f parse-tcpdump.awk | tee -a "$OUTPUT" 
+tcpdump -l -I -i "$IFACE" -e -s 256 type mgt subtype probe-req | awk -f parse-tcpdump.awk | tee -a "$OUTPUT" 
